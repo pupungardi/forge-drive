@@ -9,12 +9,12 @@ import {
 } from 'lucide-react'
 
 const files = [
-  { name: 'Brand guidelines.pdf', type: 'pdf', size: '8.4 MB', date: 'Today, 10:42 AM', color: 'rose' },
-  { name: 'Q4 Product Launch', type: 'folder', size: '12 items', date: 'Today, 9:18 AM', color: 'amber' },
-  { name: 'dashboard-v2.fig', type: 'fig', size: '24.1 MB', date: 'Yesterday', color: 'violet' },
-  { name: 'hero-dark.webp', type: 'image', size: '2.8 MB', date: 'Yesterday', color: 'sky' },
-  { name: 'forge-api.ts', type: 'code', size: '14 KB', date: 'Oct 10, 2026', color: 'emerald' },
-  { name: 'Archive 2025.zip', type: 'zip', size: '1.2 GB', date: 'Oct 8, 2026', color: 'orange' },
+  { name: 'Brand guidelines.pdf', type: 'pdf', size: '8.4 MB', date: 'Today, 10:42 AM', color: 'rose', sections: ['My Drive', 'Recent', 'Starred'] },
+  { name: 'Q4 Product Launch', type: 'folder', size: '12 items', date: 'Today, 9:18 AM', color: 'amber', sections: ['My Drive', 'Shared with me', 'Recent', 'Starred'] },
+  { name: 'dashboard-v2.fig', type: 'fig', size: '24.1 MB', date: 'Yesterday', color: 'violet', sections: ['My Drive', 'Shared with me', 'Recent'] },
+  { name: 'hero-dark.webp', type: 'image', size: '2.8 MB', date: 'Yesterday', color: 'sky', sections: ['My Drive', 'Recent'] },
+  { name: 'forge-api.ts', type: 'code', size: '14 KB', date: 'Oct 10, 2026', color: 'emerald', sections: ['My Drive', 'Shared with me'] },
+  { name: 'Archive 2025.zip', type: 'zip', size: '1.2 GB', date: 'Oct 8, 2026', color: 'orange', sections: ['My Drive'] },
 ]
 
 const iconFor = (type: string) => {
@@ -32,7 +32,10 @@ export default function Page() {
   const handleMobileSection = (section: string) => setActive(section === 'Browser' ? 'My Drive' : section)
   const [query, setQuery] = useState('')
   const [menuOpen, setMenuOpen] = useState(false)
-  const filtered = files.filter((file) => file.name.toLowerCase().includes(query.toLowerCase()))
+  const sectionFiles = active === 'Search' || active === 'Profile'
+    ? files
+    : files.filter((file) => file.sections.includes(active))
+  const filtered = sectionFiles.filter((file) => file.name.toLowerCase().includes(query.toLowerCase()))
 
   return (
     <main className="min-h-screen bg-[#101214] pb-24 text-[#eef0f2] selection:bg-orange-500/30 md:pb-0">
