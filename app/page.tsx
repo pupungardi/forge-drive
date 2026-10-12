@@ -1,6 +1,6 @@
 'use client'
 
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import {
   Activity, Bell, Clock3, FileArchive, FileCode2, FileImage, FileText, Folder,
   Grid2X2, HardDrive, Home, LayoutList, MessageSquareText, Plus, Search,
@@ -23,6 +23,14 @@ const iconFor = (type: string) => {
 
 export default function Page() {
   const [active, setActive] = useState('My Drive')
+  const [phoneBlocked, setPhoneBlocked] = useState(false)
+
+  useEffect(() => {
+    const userAgent = navigator.userAgent
+    const isAndroidPhone = /Android/i.test(userAgent) && /Mobile/i.test(userAgent)
+    const isApplePhone = /iPhone|iPod/i.test(userAgent)
+    setPhoneBlocked(isAndroidPhone || isApplePhone)
+  }, [])
   const [view, setView] = useState<'grid' | 'list'>('grid')
   const mobileSection = active === 'My Drive' ? 'Browser' : active
   const handleMobileSection = (section: string) => setActive(section === 'Browser' ? 'My Drive' : section)
@@ -44,6 +52,23 @@ export default function Page() {
     ? files
     : files.filter((file) => file.sections.includes(active))
   const filtered = sectionFiles.filter((file) => file.name.toLowerCase().includes(query.toLowerCase()))
+
+  if (phoneBlocked) {
+    return (
+      <main className="flex min-h-screen items-center justify-center bg-[#101214] px-6 text-[#eef0f2]">
+        <section className="w-full max-w-md rounded-3xl border border-white/[0.1] bg-[#15181b] p-7 text-center shadow-[0_24px_70px_rgba(0,0,0,.35)]">
+          <div className="mx-auto flex size-14 items-center justify-center rounded-2xl bg-orange-500 text-[#111] shadow-[0_0_28px_rgba(249,115,22,.2)]"><Zap size={25} fill="currentColor" /></div>
+          <p className="mt-6 text-xs font-semibold uppercase tracking-[0.18em] text-orange-400">ForgeDrive</p>
+          <h1 className="mt-3 text-2xl font-semibold tracking-[-0.03em] text-white">Tablet access only</h1>
+          <p className="mt-3 text-sm leading-6 text-[#9aa2a9]">ForgeDrive web is available on Android tablets and iPad. On phones, install the mobile app instead.</p>
+          <div className="mt-6 grid gap-3 sm:grid-cols-2">
+            <a href="https://play.google.com/store" target="_blank" rel="noreferrer" className="rounded-xl border border-white/[0.1] bg-white/[0.04] px-4 py-3 text-sm font-medium text-white transition hover:bg-white/[0.08]">Google Play</a>
+            <a href="https://www.apple.com/app-store/" target="_blank" rel="noreferrer" className="rounded-xl border border-white/[0.1] bg-white/[0.04] px-4 py-3 text-sm font-medium text-white transition hover:bg-white/[0.08]">Apple Store</a>
+          </div>
+        </section>
+      </main>
+    )
+  }
 
   return (
     <main className="min-h-screen bg-[#101214] pb-24 text-[#eef0f2] selection:bg-orange-500/30 md:pb-0">
