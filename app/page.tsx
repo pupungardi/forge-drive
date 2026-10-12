@@ -60,10 +60,10 @@ export default function Page() {
           <div className="mx-auto flex size-14 items-center justify-center rounded-2xl bg-orange-500 text-[#111] shadow-[0_0_28px_rgba(249,115,22,.2)]"><Zap size={25} fill="currentColor" /></div>
           <p className="mt-6 text-xs font-semibold uppercase tracking-[0.18em] text-orange-400">ForgeDrive</p>
           <h1 className="mt-3 text-2xl font-semibold tracking-[-0.03em] text-white">Tablet access only</h1>
-          <p className="mt-3 text-sm leading-6 text-[#9aa2a9]">ForgeDrive web is available on Android tablets and iPad. On phones, install the mobile app instead.</p>
+          <p className="mt-3 text-sm leading-6 text-[#9aa2a9]">ForgeDrive web dan aplikasi tablet tersedia untuk layar lebar Android tablet dan iPad. Aplikasi untuk HP Android atau iPhone tidak didukung.</p>
           <div className="mt-6 grid gap-3 sm:grid-cols-2">
-            <a href="https://play.google.com/store" target="_blank" rel="noreferrer" className="rounded-xl border border-white/[0.1] bg-white/[0.04] px-4 py-3 text-sm font-medium text-white transition hover:bg-white/[0.08]">Google Play</a>
-            <a href="https://www.apple.com/app-store/" target="_blank" rel="noreferrer" className="rounded-xl border border-white/[0.1] bg-white/[0.04] px-4 py-3 text-sm font-medium text-white transition hover:bg-white/[0.08]">Apple Store</a>
+            <a href="https://play.google.com/store/search?q=ForgeDrive%20tablet&c=apps" target="_blank" rel="noreferrer" className="rounded-xl border border-white/[0.1] bg-white/[0.04] px-4 py-3 text-sm font-medium text-white transition hover:bg-white/[0.08]">Google Play — Tablet</a>
+            <a href="https://apps.apple.com/us/genre/ios-ipad/id36" target="_blank" rel="noreferrer" className="rounded-xl border border-white/[0.1] bg-white/[0.04] px-4 py-3 text-sm font-medium text-white transition hover:bg-white/[0.08]">Apple Store — iPad</a>
           </div>
         </section>
       </main>
