@@ -33,7 +33,7 @@ export default function Page() {
   const filtered = files.filter((file) => file.name.toLowerCase().includes(query.toLowerCase()))
 
   return (
-    <main className="min-h-screen bg-[#101214] text-[#eef0f2] selection:bg-orange-500/30">
+    <main className="min-h-screen bg-[#101214] pb-24 text-[#eef0f2] selection:bg-orange-500/30 md:pb-0">
       <div className="flex min-h-screen">
         <aside className="hidden w-[232px] shrink-0 border-r border-white/[0.07] bg-[#0c0e10] p-4 md:flex md:flex-col">
           <div className="mb-10 flex items-center gap-2.5 px-2">
@@ -61,6 +61,9 @@ export default function Page() {
             <div className="mt-10 flex items-center gap-3 rounded-xl border border-orange-500/15 bg-orange-500/[0.04] p-4"><Archive size={18} className="text-orange-400" /><div className="flex-1"><p className="text-sm font-medium">Your files are protected</p><p className="mt-1 text-xs text-[#7b7771]">ForgeDrive encrypts your data at rest and in transit.</p></div><ShieldCheck size={17} className="text-[#8a6343]" /></div>
           </div>
         </section>
+        <nav className="fixed inset-x-4 bottom-4 z-20 flex h-[68px] items-center justify-around rounded-[24px] border border-white/15 bg-white/[0.09] px-2 shadow-[0_12px_40px_rgba(0,0,0,.45)] backdrop-blur-2xl md:hidden" aria-label="Mobile navigation">
+          {[[Home, 'My Drive'], [Users, 'Shared'], [Plus, 'Upload'], [Clock3, 'Recent'], [Settings, 'Settings']].map(([Icon, label]) => <button key={label as string} onClick={() => setActive(label === 'Shared' ? 'Shared with me' : label as string)} className={`flex min-w-12 flex-col items-center gap-1 rounded-2xl px-2 py-2 text-[10px] transition ${active === label || (label === 'Shared' && active === 'Shared with me') ? 'bg-orange-500/15 text-orange-400' : 'text-[#a1a8ae] hover:text-white'}`}><Icon size={18} /><span>{label}</span></button>)}
+        </nav>
       </div>
     </main>
   )
