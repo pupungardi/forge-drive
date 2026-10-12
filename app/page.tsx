@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import {
   Archive, Bell, ChevronDown, Clock3, Cloud, FileArchive, FileCode2,
   FileImage, FileText, Folder, Grid2X2, HardDrive, HelpCircle, Home,
@@ -25,6 +25,8 @@ export default function Page() {
   const handleMobileSection = (section: string) => setActive(section === 'Browser' ? 'My Drive' : section)
   const [query, setQuery] = useState('')
   const [menuOpen, setMenuOpen] = useState(false)
+  const uploadInputRef = useRef<HTMLInputElement>(null)
+  const openUpload = () => uploadInputRef.current?.click()
   const sectionFiles = active === 'Search' || active === 'Profile'
     ? files
     : files.filter((file) => file.sections.includes(active))
@@ -60,6 +62,8 @@ export default function Page() {
         <nav className="fixed bottom-4 left-1/2 z-20 flex h-[66px] w-[calc(100%-2rem)] max-w-[448px] -translate-x-1/2 items-center gap-1 rounded-[22px] border border-white/[0.16] bg-white/[0.08] px-1.5 shadow-[0_18px_50px_rgba(0,0,0,.5),inset_0_1px_0_rgba(255,255,255,.12)] backdrop-blur-2xl md:hidden" aria-label="Mobile navigation">
           {[[Home, 'Browser'], [Search, 'Search'], [UserRound, 'Profile']].map(([Icon, label]) => <button key={label as string} onClick={() => handleMobileSection(label as string)} aria-current={mobileSection === label ? 'page' : undefined} className={`flex h-[56px] min-w-0 flex-1 flex-col items-center justify-center gap-1 rounded-[17px] px-2 text-[10px] font-medium transition ${mobileSection === label ? 'bg-white/[0.1] text-orange-300 shadow-[inset_0_1px_0_rgba(255,255,255,.08)]' : 'text-[#aeb5bb] hover:text-white'}`}><Icon className="size-[18px]" /><span className="truncate">{label}</span></button>)}
         </nav>
+        <input ref={uploadInputRef} type="file" className="sr-only" aria-label="Choose files to upload" multiple />
+        <button type="button" onClick={openUpload} aria-label="New upload" className="fixed bottom-[6.25rem] right-5 z-20 flex size-14 items-center justify-center rounded-full bg-orange-500 text-[#16110c] shadow-[0_10px_30px_rgba(249,115,22,.35)] transition hover:scale-105 hover:bg-orange-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-300 focus-visible:ring-offset-2 focus-visible:ring-offset-[#101214] md:hidden"><Plus size={24} strokeWidth={2.5} /><span className="sr-only">New upload</span></button>
       </div>
     </main>
   )
