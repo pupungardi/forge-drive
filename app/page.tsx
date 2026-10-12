@@ -5,7 +5,7 @@ import {
   Archive, Bell, ChevronDown, Clock3, Cloud, FileArchive, FileCode2,
   FileImage, FileText, Folder, Grid2X2, HardDrive, HelpCircle, Home,
   LayoutList, MoreHorizontal, Plus, Search, Settings, ShieldCheck,
-  Star, Trash2, Upload, Users, Zap,
+  Star, Trash2, Upload, UserRound, Users, Zap,
 } from 'lucide-react'
 
 const files = [
@@ -61,8 +61,8 @@ export default function Page() {
             <div className="mt-10 flex items-center gap-3 rounded-xl border border-orange-500/15 bg-orange-500/[0.04] p-4"><Archive size={18} className="text-orange-400" /><div className="flex-1"><p className="text-sm font-medium">Your files are protected</p><p className="mt-1 text-xs text-[#7b7771]">ForgeDrive encrypts your data at rest and in transit.</p></div><ShieldCheck size={17} className="text-[#8a6343]" /></div>
           </div>
         </section>
-        <nav className="fixed inset-x-3 bottom-3 z-20 flex h-[70px] items-center justify-around rounded-[26px] border border-white/20 bg-[#22262a]/80 px-1.5 shadow-[0_16px_45px_rgba(0,0,0,.55),inset_0_1px_0_rgba(255,255,255,.12)] backdrop-blur-2xl md:hidden" aria-label="Mobile navigation">
-          {[[Home, 'My Drive'], [Users, 'Shared'], [Plus, 'Upload'], [Clock3, 'Recent'], [Settings, 'Settings']].map(([Icon, label]) => <button key={label as string} onClick={() => setActive(label === 'Shared' ? 'Shared with me' : label as string)} className={`flex min-w-0 flex-1 flex-col items-center gap-1 rounded-[19px] px-1 py-2 text-[10px] font-medium transition ${active === label || (label === 'Shared' && active === 'Shared with me') ? 'bg-white/12 text-orange-300 shadow-[inset_0_1px_0_rgba(255,255,255,.1)]' : 'text-[#aeb5bb] hover:text-white'}`}><Icon className={label === 'Upload' ? 'size-[19px]' : 'size-[18px]'} /><span className="truncate">{label}</span></button>)}
+        <nav className="fixed bottom-4 left-1/2 z-20 flex h-[66px] w-[calc(100%-2rem)] max-w-[448px] -translate-x-1/2 items-center gap-1 rounded-[22px] border border-white/[0.16] bg-white/[0.08] px-1.5 shadow-[0_18px_50px_rgba(0,0,0,.5),inset_0_1px_0_rgba(255,255,255,.12)] backdrop-blur-2xl md:hidden" aria-label="Mobile navigation">
+          {[[Home, 'My Drive'], [Search, 'Search'], [UserRound, 'Profile']].map(([Icon, label]) => <button key={label as string} onClick={() => setActive(label as string)} className={`flex h-[56px] min-w-0 flex-1 flex-col items-center justify-center gap-1 rounded-[17px] px-2 text-[10px] font-medium transition ${active === label ? 'bg-white/[0.1] text-orange-300 shadow-[inset_0_1px_0_rgba(255,255,255,.08)]' : 'text-[#aeb5bb] hover:text-white'}`}><Icon className="size-[18px]" /><span className="truncate">{label}</span></button>)}
         </nav>
       </div>
     </main>
