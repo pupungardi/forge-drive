@@ -26,7 +26,16 @@ export default function Page() {
   const [query, setQuery] = useState('')
   const [menuOpen, setMenuOpen] = useState(false)
   const uploadInputRef = useRef<HTMLInputElement>(null)
-  const openUpload = () => uploadInputRef.current?.click()
+  const folderInputRef = useRef<HTMLInputElement>(null)
+  const openUpload = () => setMenuOpen((isOpen) => !isOpen)
+  const chooseFiles = () => {
+    setMenuOpen(false)
+    uploadInputRef.current?.click()
+  }
+  const chooseFolder = () => {
+    setMenuOpen(false)
+    folderInputRef.current?.click()
+  }
   const sectionFiles = active === 'Search' || active === 'Profile'
     ? files
     : files.filter((file) => file.sections.includes(active))
@@ -70,7 +79,9 @@ export default function Page() {
           {[[Home, 'Browser'], [Search, 'Search'], [UserRound, 'Profile']].map(([Icon, label]) => <button key={label as string} onClick={() => handleMobileSection(label as string)} aria-current={mobileSection === label ? 'page' : undefined} className={`flex h-[56px] min-w-0 flex-1 flex-col items-center justify-center gap-1 rounded-[17px] px-2 text-[10px] font-medium transition ${mobileSection === label ? 'bg-white/[0.1] text-orange-300 shadow-[inset_0_1px_0_rgba(255,255,255,.08)]' : 'text-[#aeb5bb] hover:text-white'}`}><Icon className="size-[18px]" /><span className="truncate">{label}</span></button>)}
         </nav>
         <input ref={uploadInputRef} type="file" className="sr-only" aria-label="Choose files to upload" multiple />
-        <button type="button" onClick={openUpload} aria-label="New upload" className="fixed bottom-24 right-5 z-20 flex size-14 items-center justify-center rounded-full bg-orange-500 text-[#16110c] shadow-[0_10px_30px_rgba(249,115,22,.35)] transition hover:scale-105 hover:bg-orange-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-300 focus-visible:ring-offset-2 focus-visible:ring-offset-[#101214] md:bottom-8 md:right-8"><Plus size={24} strokeWidth={2.5} /><span className="sr-only">New upload</span></button>
+        <input ref={folderInputRef} type="file" className="sr-only" aria-label="Choose a folder to upload" {...({ webkitdirectory: '', directory: '' } as React.InputHTMLAttributes<HTMLInputElement>)} />
+        {menuOpen && <div className="fixed bottom-40 right-5 z-30 w-44 overflow-hidden rounded-2xl border border-white/[0.14] bg-[#1b1e21]/95 p-1.5 shadow-[0_16px_40px_rgba(0,0,0,.5)] backdrop-blur-xl md:bottom-24 md:right-8" role="menu" aria-label="New upload options"><button type="button" onClick={chooseFiles} className="flex w-full items-center gap-3 rounded-xl px-3 py-3 text-left text-sm text-white transition hover:bg-white/[0.1]" role="menuitem"><FileText size={17} className="text-orange-400" />Files</button><button type="button" onClick={chooseFolder} className="flex w-full items-center gap-3 rounded-xl px-3 py-3 text-left text-sm text-white transition hover:bg-white/[0.1]" role="menuitem"><Folder size={17} className="text-orange-400" />Folders</button></div>}
+        <button type="button" onClick={openUpload} aria-expanded={menuOpen} aria-haspopup="menu" aria-label="New upload" className="fixed bottom-24 right-5 z-20 flex size-14 items-center justify-center rounded-full bg-orange-500 text-[#16110c] shadow-[0_10px_30px_rgba(249,115,22,.35)] transition hover:scale-105 hover:bg-orange-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-300 focus-visible:ring-offset-2 focus-visible:ring-offset-[#101214] md:bottom-8 md:right-8"><Plus size={24} strokeWidth={2.5} /><span className="sr-only">New upload</span></button>
       </div>
     </main>
   )
