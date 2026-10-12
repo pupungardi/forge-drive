@@ -49,20 +49,12 @@ export default function Page() {
             <div className="flex size-8 items-center justify-center rounded-lg bg-orange-500 text-[#111] shadow-[0_0_24px_rgba(249,115,22,.2)]"><Zap size={17} fill="currentColor" /></div>
             <span className="text-[17px] font-semibold tracking-[-0.03em]">Forge<span className="text-orange-500">Drive</span></span>
           </div>
-          <button className="mb-7 flex h-10 items-center justify-center gap-2 rounded-lg bg-orange-500 px-4 text-sm font-semibold text-[#16110c] transition hover:bg-orange-400"><Plus size={16} /> New upload</button>
           <nav className="flex flex-col gap-1 text-sm" aria-label="Main navigation">
             {[[Home, 'My Drive'], [Users, 'Shared with me'], [Clock3, 'Recent'], [Star, 'Starred']].map(([Icon, label]) => <button key={label as string} onClick={() => setActive(label as string)} className={`flex items-center gap-3 rounded-md px-3 py-2.5 text-left transition ${active === label ? 'bg-orange-500/10 font-medium text-orange-400' : 'text-[#899099] hover:bg-white/[0.05] hover:text-white'}`}><Icon size={17} />{label}</button>)}
           </nav>
           <div className="mt-8 border-t border-white/[0.07] pt-6">
             <p className="mb-3 px-3 text-[10px] font-semibold uppercase tracking-[0.16em] text-[#60676e]">Workspace</p>
             {[[HardDrive, 'Storage'], [ShieldCheck, 'Security']].map(([Icon, label]) => <button key={label as string} className="flex w-full items-center gap-3 rounded-md px-3 py-2.5 text-left text-sm text-[#899099] transition hover:bg-white/[0.05] hover:text-white"><Icon size={17} />{label}</button>)}
-          </div>
-          <div className="mt-6 rounded-xl border border-white/[0.07] bg-[#15181b] p-2">
-            <p className="px-2 pb-2 text-[10px] font-semibold uppercase tracking-[0.16em] text-[#60676e]">Browse as</p>
-            <div className="grid grid-cols-2 gap-1 rounded-lg bg-[#101214] p-1">
-              <button onClick={() => setView('grid')} className={`rounded-md px-2 py-2 text-xs font-medium transition ${view === 'grid' ? 'bg-orange-500/15 text-orange-300' : 'text-[#737b82] hover:text-white'}`}>Files</button>
-              <button onClick={() => setView('list')} className={`rounded-md px-2 py-2 text-xs font-medium transition ${view === 'list' ? 'bg-orange-500/15 text-orange-300' : 'text-[#737b82] hover:text-white'}`}>Folders</button>
-            </div>
           </div>
           <div className="mt-auto rounded-xl border border-white/[0.07] bg-[#15181b] p-3.5"><div className="mb-2 flex items-center justify-between text-xs"><span className="text-[#9da4aa]">Storage used</span><span className="font-medium text-white">0%</span></div><div className="mb-2 h-1.5 overflow-hidden rounded-full bg-white/[0.08]"><div className="h-full w-0 rounded-full bg-orange-500" /></div><p className="text-[11px] text-[#646c73]">No storage used</p><button className="mt-3 text-xs font-medium text-orange-400 hover:text-orange-300">Manage storage →</button></div>
         </aside>
