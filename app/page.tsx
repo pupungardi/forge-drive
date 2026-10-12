@@ -2,13 +2,16 @@
 
 import { useRef, useState } from 'react'
 import {
-  Activity, Archive, Bell, ChevronDown, Clock3, Cloud, FileArchive, FileCode2,
-  FileImage, FileText, Folder, Grid2X2, HardDrive, HelpCircle, Home,
-  LayoutList, MoreHorizontal, Plus, Search, Settings, ShieldCheck,
-  MessageSquareText, Star, Trash2, Upload, UserRound, Users, Zap,
+  Activity, Bell, Clock3, FileArchive, FileCode2, FileImage, FileText, Folder,
+  Grid2X2, HardDrive, Home, LayoutList, MessageSquareText, Plus, Search,
+  ShieldCheck, Star, Upload, UserRound, Users, Zap,
 } from 'lucide-react'
+import type { LucideIcon } from 'lucide-react'
 
 const files: { name: string; type: string; size: string; date: string; color: string; sections: string[] }[] = []
+const primaryNavigation: [LucideIcon, string][] = [[Home, 'My Drive'], [Users, 'Shared with me'], [Clock3, 'Recent'], [Star, 'Starred']]
+const workspaceNavigation: [LucideIcon, string][] = [[HardDrive, 'Storage'], [Activity, 'Activity'], [Users, 'People'], [ShieldCheck, 'Security'], [MessageSquareText, 'Feedback']]
+const mobileNavigation: [LucideIcon, string][] = [[Home, 'Browser'], [Search, 'Search'], [UserRound, 'Profile']]
 
 const iconFor = (type: string) => {
   if (type === 'folder') return Folder
@@ -52,11 +55,11 @@ export default function Page() {
             <span className="text-[17px] font-semibold tracking-[-0.03em]">Forge<span className="text-orange-500">Drive</span></span>
           </div>
           <nav className="flex flex-col gap-1 text-sm" aria-label="Main navigation">
-            {[[Home, 'My Drive'], [Users, 'Shared with me'], [Clock3, 'Recent'], [Star, 'Starred']].map(([Icon, label]) => <button key={label as string} onClick={() => setActive(label as string)} className={`flex items-center gap-3 rounded-md px-3 py-2.5 text-left transition ${active === label ? 'bg-orange-500/10 font-medium text-orange-400' : 'text-[#899099] hover:bg-white/[0.05] hover:text-white'}`}><Icon size={17} />{label}</button>)}
+            {primaryNavigation.map(([Icon, label]) => <button key={label as string} onClick={() => setActive(label as string)} className={`flex items-center gap-3 rounded-md px-3 py-2.5 text-left transition ${active === label ? 'bg-orange-500/10 font-medium text-orange-400' : 'text-[#899099] hover:bg-white/[0.05] hover:text-white'}`}><Icon size={17} />{label}</button>)}
           </nav>
           <div className="mt-8 border-t border-white/[0.07] pt-6">
             <p className="mb-3 px-3 text-[10px] font-semibold uppercase tracking-[0.16em] text-[#60676e]">Workspace</p>
-            {[[HardDrive, 'Storage'], [Activity, 'Activity'], [Users, 'People'], [ShieldCheck, 'Security'], [MessageSquareText, 'Feedback']].map(([Icon, label]) => <button key={label as string} onClick={() => setActive(label as string)} className={`flex w-full items-center gap-3 rounded-md px-3 py-2.5 text-left text-sm transition ${active === label ? 'bg-orange-500/10 font-medium text-orange-400' : 'text-[#899099] hover:bg-white/[0.05] hover:text-white'}`}><Icon size={17} />{label}</button>)}
+            {workspaceNavigation.map(([Icon, label]) => <button key={label as string} onClick={() => setActive(label as string)} className={`flex w-full items-center gap-3 rounded-md px-3 py-2.5 text-left text-sm transition ${active === label ? 'bg-orange-500/10 font-medium text-orange-400' : 'text-[#899099] hover:bg-white/[0.05] hover:text-white'}`}><Icon size={17} />{label}</button>)}
           </div>
           <div className="mt-auto flex flex-col gap-4">
             <footer className="flex flex-wrap gap-x-3 gap-y-1 px-2 text-[10px] text-[#626a72]" aria-label="ForgeDrive information">
@@ -82,7 +85,7 @@ export default function Page() {
           </div>
         </section>
         <nav className="mobile-bottom-nav fixed bottom-4 left-1/2 z-20 flex h-[66px] w-[calc(100%-2rem)] max-w-[448px] -translate-x-1/2 items-center gap-1 rounded-[22px] border border-white/[0.16] bg-white/[0.08] px-1.5 shadow-[0_18px_50px_rgba(0,0,0,.5),inset_0_1px_0_rgba(255,255,255,.12)] backdrop-blur-2xl md:hidden" aria-label="Mobile navigation">
-          {[[Home, 'Browser'], [Search, 'Search'], [UserRound, 'Profile']].map(([Icon, label]) => <button key={label as string} onClick={() => handleMobileSection(label as string)} aria-current={mobileSection === label ? 'page' : undefined} className={`flex h-[56px] min-w-0 flex-1 flex-col items-center justify-center gap-1 rounded-[17px] px-2 text-[10px] font-medium transition ${mobileSection === label ? 'bg-white/[0.1] text-orange-300 shadow-[inset_0_1px_0_rgba(255,255,255,.08)]' : 'text-[#aeb5bb] hover:text-white'}`}><Icon className="size-[18px]" /><span className="truncate">{label}</span></button>)}
+          {mobileNavigation.map(([Icon, label]) => <button key={label as string} onClick={() => handleMobileSection(label as string)} aria-current={mobileSection === label ? 'page' : undefined} className={`flex h-[56px] min-w-0 flex-1 flex-col items-center justify-center gap-1 rounded-[17px] px-2 text-[10px] font-medium transition ${mobileSection === label ? 'bg-white/[0.1] text-orange-300 shadow-[inset_0_1px_0_rgba(255,255,255,.08)]' : 'text-[#aeb5bb] hover:text-white'}`}><Icon className="size-[18px]" /><span className="truncate">{label}</span></button>)}
         </nav>
         <input ref={uploadInputRef} type="file" className="sr-only" aria-label="Choose files to upload" multiple />
         <input ref={folderInputRef} type="file" className="sr-only" aria-label="Choose a folder to upload" {...({ webkitdirectory: '', directory: '' } as React.InputHTMLAttributes<HTMLInputElement>)} />
