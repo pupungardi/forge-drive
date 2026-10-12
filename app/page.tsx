@@ -2,7 +2,7 @@
 
 import { useRef, useState } from 'react'
 import {
-  Archive, Bell, ChevronDown, Clock3, Cloud, FileArchive, FileCode2,
+  Activity, Archive, Bell, ChevronDown, Clock3, Cloud, FileArchive, FileCode2,
   FileImage, FileText, Folder, Grid2X2, HardDrive, HelpCircle, Home,
   LayoutList, MoreHorizontal, Plus, Search, Settings, ShieldCheck,
   MessageSquareText, Star, Trash2, Upload, UserRound, Users, Zap,
@@ -54,7 +54,7 @@ export default function Page() {
           </nav>
           <div className="mt-8 border-t border-white/[0.07] pt-6">
             <p className="mb-3 px-3 text-[10px] font-semibold uppercase tracking-[0.16em] text-[#60676e]">Workspace</p>
-            {[[HardDrive, 'Storage'], [ShieldCheck, 'Security'], [MessageSquareText, 'Feedback']].map(([Icon, label]) => <button key={label as string} onClick={() => setActive(label as string)} className={`flex w-full items-center gap-3 rounded-md px-3 py-2.5 text-left text-sm transition ${active === label ? 'bg-orange-500/10 font-medium text-orange-400' : 'text-[#899099] hover:bg-white/[0.05] hover:text-white'}`}><Icon size={17} />{label}</button>)}
+            {[[HardDrive, 'Storage'], [Activity, 'Activity'], [Users, 'People'], [ShieldCheck, 'Security'], [MessageSquareText, 'Feedback']].map(([Icon, label]) => <button key={label as string} onClick={() => setActive(label as string)} className={`flex w-full items-center gap-3 rounded-md px-3 py-2.5 text-left text-sm transition ${active === label ? 'bg-orange-500/10 font-medium text-orange-400' : 'text-[#899099] hover:bg-white/[0.05] hover:text-white'}`}><Icon size={17} />{label}</button>)}
           </div>
           <div className="mt-auto flex flex-col gap-4">
             <div className="rounded-xl border border-white/[0.07] bg-[#15181b] p-3.5"><div className="mb-2 flex items-center justify-between text-xs"><span className="text-[#9da4aa]">Storage used</span><span className="font-medium text-white">0%</span></div><div className="mb-2 h-1.5 overflow-hidden rounded-full bg-white/[0.08]"><div className="h-full w-0 rounded-full bg-orange-500" /></div><p className="text-[11px] text-[#646c73]">No storage used</p><button className="mt-3 text-xs font-medium text-orange-400 hover:text-orange-300">Manage storage →</button></div>
