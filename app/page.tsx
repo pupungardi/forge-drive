@@ -59,10 +59,10 @@ export default function Page() {
           <div className="mt-auto flex flex-col gap-4">
             <div className="overflow-hidden rounded-2xl border border-white/[0.1] bg-gradient-to-br from-[#1a1d20] to-[#121416] p-3.5 shadow-[0_12px_30px_rgba(0,0,0,.16)]"><div className="flex items-start justify-between"><div className="flex items-center gap-2.5"><div className="flex size-8 items-center justify-center rounded-xl bg-orange-500/10 text-orange-400"><HardDrive size={15} /></div><div><p className="text-xs font-medium text-white">Storage</p><p className="mt-0.5 text-[10px] text-[#737b82]">Your workspace</p></div></div><span className="rounded-full bg-white/[0.07] px-2 py-1 text-[10px] font-medium text-[#aeb5bb]">0%</span></div><div className="mt-4"><div className="mb-1.5 flex items-center justify-between text-[10px] text-[#737b82]"><span>0 GB used</span><span>Free</span></div><div className="h-2 overflow-hidden rounded-full bg-white/[0.08] p-px"><div className="h-full w-0 rounded-full bg-gradient-to-r from-orange-500 to-amber-300" /></div></div><button className="mt-3 inline-flex items-center text-[11px] font-medium text-orange-400 transition hover:text-orange-300">Manage storage <span aria-hidden="true" className="ml-1">→</span></button></div>
             <footer className="flex flex-wrap gap-x-3 gap-y-1 px-2 text-[10px] text-[#626a72]" aria-label="ForgeDrive information">
-              <a href="#about" className="transition hover:text-white">About us</a>
-              <a href="#help" className="transition hover:text-white">Help center</a>
-              <a href="#privacy" className="transition hover:text-white">Privacy</a>
-              <a href="#terms" className="transition hover:text-white">Terms</a>
+              <a href="https://www.google.com/drive/" target="_blank" rel="noreferrer" className="transition hover:text-white">About us</a>
+              <a href="https://support.google.com/drive/" target="_blank" rel="noreferrer" className="transition hover:text-white">Help center</a>
+              <a href="https://policies.google.com/privacy" target="_blank" rel="noreferrer" className="transition hover:text-white">Privacy</a>
+              <a href="https://policies.google.com/terms" target="_blank" rel="noreferrer" className="transition hover:text-white">Terms</a>
             </footer>
           </div>
         </aside>
